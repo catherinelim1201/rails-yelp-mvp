@@ -1,0 +1,51 @@
+<div class="container">
+  <h1> Restaurant Name:
+  <%= @restaurant.name %>
+  </h1>
+
+  <hr>
+
+  <p> Address:
+  <%= @restaurant.address %>
+  </p>
+
+  <p> Phone Number:
+  <%= @restaurant.phone_number %>
+  </p>
+
+  <p>Category:
+  <%= @restaurant.category %>
+  </p>
+
+
+  <h2><strong>Reviews</strong></h2>
+    <p class="list-group">
+      <% @restaurant.reviews.each do |review| %>
+        <div class="list-group-item"><%= review.content %></div>
+        <div class="list-group-item"><%= review.rating %></div>
+      <% end %>
+    </p>
+    <br>
+
+    <button>
+      <%= link_to "Back to Main Page", restaurants_path(@restaurant) %>
+    </button>
+
+    <%# remove this add review button --> the form to create review is not connected to  %>
+    <%# restaurant.new form %>
+    <%# <button>
+      <%= link_to "Add Review", new_restaurant_review_path(@restaurant) %>
+    <%# </button> %>
+
+
+    <h1>New review</h1>
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= f.input :content %>
+      <%= f.input :rating %>
+      <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <% end %>
+
+    <button class="btn">
+      <%= link_to "Back to restaurant", restaurant_path(@restaurant) %>
+    </button>
+</div>
